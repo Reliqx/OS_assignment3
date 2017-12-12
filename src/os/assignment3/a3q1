@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+//Functions for calculating each value
+void *averagef(void *str);
+void *minf(void *ptr);
+void *maxf(void *ptr);
+
+//Global variables
+double average;
+int min;
+int max;
+
+//Storing both size and values in a variable
+typedef struct dstruct {
+    int size;
+    int *values;
+} dstruct;
+
+main(int argc, char *argv[]) {
+
+}
