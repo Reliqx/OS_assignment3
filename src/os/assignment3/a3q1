@@ -19,5 +19,17 @@ typedef struct dstruct {
 } dstruct;
 
 main(int argc, char *argv[]) {
+//Create variables
+    //Dynamic array to be the size of the number integers entered
+    int arguments[argc - 1];
+    int averagethread, minthread, maxthread;
+    pthread_t thread1, thread2, thread3;
 
+    //Change string to int
+    for (int x = 0; x < (argc - 1); x++) {
+        arguments[x] = atoi(argv[x + 1]);
+    }
+
+    //Storing number of arguments and their values
+    dstruct ds = {argc - 1, arguments};
 }
