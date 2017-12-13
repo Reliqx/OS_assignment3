@@ -19,7 +19,8 @@ typedef struct dstruct {
 } dstruct;
 
 main(int argc, char *argv[]) {
-//Create variables
+
+    //Create variables
     //Dynamic array to be the size of the number integers entered
     int arguments[argc - 1];
     int averagethread, minthread, maxthread;
@@ -32,6 +33,21 @@ main(int argc, char *argv[]) {
 
     //Storing number of arguments and their values
     dstruct ds = {argc - 1, arguments};
+
+    // Creating threads for average, min, and max with default attributes
+    averagethread = pthread_create(&thread1, NULL, (void *) averagef, (void *) &ds);
+    minthread = pthread_create(&thread2, NULL, (void *) minf, (void *) &ds);
+    maxthread = pthread_create(&thread3, NULL, (void *) maxf, (void *) &ds);
+
+    //Each thread waits until the previous is completed
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+
+    //Final print outs
+    printf("The average value is:  %g\n", average);
+    printf("The minimum value is:  %d\n", min);
+    printf("The maximum value is:  %d\n", max);
 }
 
 void *averagef(void *pointer) {
