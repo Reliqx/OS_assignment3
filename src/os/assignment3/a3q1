@@ -33,3 +33,54 @@ main(int argc, char *argv[]) {
     //Storing number of arguments and their values
     dstruct ds = {argc - 1, arguments};
 }
+
+void *averagef(void *pointer) {
+    dstruct *arguments;
+    arguments = (dstruct *) pointer;
+
+    //Variable to store amount of arguments entered
+    int averagesize = arguments->size;
+
+    //Calcualting average
+    for (int x = 0; x < averagesize; x++) {
+        average += (arguments->values[x]);
+    }
+    //Final calcualtion of average
+    average = (int) (average / averagesize);
+}
+
+void *minf(void *pointer) {
+    dstruct *arguments;
+    arguments = (dstruct *) pointer;
+
+    //Storing number of arguments
+    int minsize = arguments->size;
+
+    //Setting initial number to check against
+    min = (arguments->values[0]);
+
+    //Iterate through to find min
+    for (int x = 1; x < minsize; x++) {
+        if (min > (arguments->values[x])) {
+            min = (arguments->values[x]);
+        }
+    }
+}
+
+void *maxf(void *pointer) {
+    dstruct *arguments;
+    arguments = (dstruct *) pointer;
+
+    //Storing number of arguments
+    int maxsize = arguments->size;
+
+    //Setting initial number to check against
+    max = arguments->values[0];
+
+    //Iterate through to find the max
+    for (int x = 1; x < maxsize; x++) {
+        if (max < arguments->values[x]) {
+            max = arguments->values[x];
+        }
+    }
+}
