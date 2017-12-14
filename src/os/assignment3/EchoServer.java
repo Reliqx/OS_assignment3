@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package os.assignment3;
+
 import java.io.*;
 import java.net.*;
 
@@ -38,7 +39,19 @@ public class EchoServer {
         } catch (IOException e) {
             System.out.println(e);
         }
-        
+        // Whenever a connection is received, start a new thread to process the connection
+        // and wait for the next connection.
+        while (true) {
+            try {
+                clientSocket = echoServer.accept();
+                numConnections++;
+                ServerConnection oneconnection = new ServerConnection(clientSocket, numConnections, this);
+                new Thread(oneconnection).start();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+
     }
 }
 
@@ -60,7 +73,7 @@ class ServerConnection implements Runnable {
         } catch (IOException e) {
             System.out.println(e);
         }
-        
+
     }
 
     public void run() {
@@ -90,4 +103,3 @@ class ServerConnection implements Runnable {
         }
     }
 }
-
