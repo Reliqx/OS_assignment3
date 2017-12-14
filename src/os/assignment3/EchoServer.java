@@ -4,18 +4,65 @@
  * and open the template in the editor.
  */
 package os.assignment3;
+import java.io.*;
+import java.net.*;
 
-/**
- *
- * @author reliq
- */
 public class EchoServer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    ServerSocket echoServer = null;
+    Socket clientSocket = null;
+    int numConnections = 0;
+    int port;
+
+    public static void main(String args[]) {
+        int port = 6789;
+        EchoServer server = new EchoServer(port);
+        server.startServer();
     }
-    
+
+    public EchoServer(int port) {
+        this.port = port;
+    }
+
+    public void stopServer() {
+        System.exit(0);
+    }
+
+    public void startServer() {
+        // Try to open a server socket on the given port
+        // Note that we can't choose a port less than 1024 if we are not
+        // privileged users (root)
+
+        try {
+            echoServer = new ServerSocket(port);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 }
+
+class ServerConnection implements Runnable {
+
+    BufferedReader is;
+    PrintStream os;
+    Socket clientSocket;
+    int id;
+    EchoServer server;
+
+    public ServerConnection(Socket clientSocket, int id, EchoServer server) {
+        this.clientSocket = clientSocket;
+        this.id = id;
+        this.server = server;
+        try {
+            is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            os = new PrintStream(clientSocket.getOutputStream());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void run() {
+        
+    }
+}
+
