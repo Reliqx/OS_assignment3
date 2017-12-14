@@ -38,6 +38,7 @@ public class EchoServer {
         } catch (IOException e) {
             System.out.println(e);
         }
+        
     }
 }
 
@@ -59,6 +60,7 @@ class ServerConnection implements Runnable {
         } catch (IOException e) {
             System.out.println(e);
         }
+        
     }
 
     public void run() {
