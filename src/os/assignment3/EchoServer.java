@@ -62,7 +62,30 @@ class ServerConnection implements Runnable {
     }
 
     public void run() {
-        
+        String line;
+        try {
+            boolean serverStop = false;
+
+            while (true) {
+                line = is.readLine();
+                if (line.equals(".")) {
+                    break;
+                } else {
+                    os.println(line);
+                }
+            }
+
+            System.out.println("Connection " + id + " closed.");
+            is.close();
+            os.close();
+            clientSocket.close();
+
+            if (serverStop) {
+                server.stopServer();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
 
