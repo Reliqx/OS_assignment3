@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package os.assignment3;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,7 +37,7 @@ public class EchoClient {
 
 	try {
 	    while ( true ) {
-		System.out.print( "Enter Something otherwise hit . to exit:" );
+		//System.out.print( "Enter Something otherwise hit . to exit:" );
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String keyboardInput = br.readLine();
 		os.writeBytes( keyboardInput + "\n" );
